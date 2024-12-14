@@ -24,16 +24,16 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserDto CrearUser(UserDto registrar){
+    public UserDto crearUser(UserDto registrar){
         UserDto userDto = new UserDto();
         try{
             User user = new User();
-            user.setName(registrar.getName());
+            user.setNombre(registrar.getNombre());
             user.setStreet(registrar.getStreet());
             user.setFecha(registrar.getFecha());
             user.setEmail(registrar.getEmail());
             user.setPassword(passwordEncoder.encode(registrar.getPassword()));
-            user.setRole(registrar.getRole());
+            user.setRol(registrar.getRol());
 
             User result = userRepo.save(user);
 
