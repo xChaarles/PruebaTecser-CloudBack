@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public interface UserControlImpl {
 
-    @PostMapping("/admin/registrar")
+    @PostMapping("/auth/registrar")
     public ResponseEntity<UserDto> crearuser(@RequestBody UserDto registrar);
 
 }

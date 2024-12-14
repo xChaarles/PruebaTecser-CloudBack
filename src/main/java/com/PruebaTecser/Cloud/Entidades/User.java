@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,8 @@ public class User implements UserDetails {
     private Integer id;
     private String nombre;
     private String street;
-    private Date fecha;
+    private LocalDate fecha;
+    private String imgUrl;
 
     @Column(unique = true)
     private String email;
@@ -67,14 +69,23 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String email, Date fecha, Integer id, String nombre, String password, Rol rol, String street) {
+    public User(String email, String imgUrl, LocalDate fecha, Integer id, String nombre, String password, Rol rol, String street) {
         this.email = email;
         this.fecha = fecha;
         this.id = id;
         this.nombre = nombre;
+        this.imgUrl = imgUrl;
         this.password = password;
         this.rol = rol;
         this.street = street;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getEmail() {
@@ -85,11 +96,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

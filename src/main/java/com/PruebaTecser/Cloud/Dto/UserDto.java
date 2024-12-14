@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -21,21 +22,23 @@ public class UserDto {
     private Integer id;
     private String nombre;
     private String street;
-    private Date fecha;
+    private String imgUrl;
+    private LocalDate fecha;
     private String email;
     private String password;
-    private Rol rol;
+    private String rol;
     private User user;
     private List<User> userList;
 
     public UserDto() {
     }
 
-    public UserDto(String email, String expirationTime, Date fecha, Integer id, String mensaje, String nombre, String password, String refreshToken, Rol rol, int statuscode, String street, String token, User user, List<User> userList) {
+    public UserDto(String email, String expirationTime, LocalDate fecha, Integer id, String imgUrl, String mensaje, String nombre, String password, String refreshToken, String rol, int statuscode, String street, String token, User user, List<User> userList) {
         this.email = email;
         this.expirationTime = expirationTime;
         this.fecha = fecha;
         this.id = id;
+        this.imgUrl = imgUrl;
         this.mensaje = mensaje;
         this.nombre = nombre;
         this.password = password;
@@ -64,11 +67,11 @@ public class UserDto {
         this.expirationTime = expirationTime;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -78,6 +81,14 @@ public class UserDto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getMensaje() {
@@ -112,11 +123,11 @@ public class UserDto {
         this.refreshToken = refreshToken;
     }
 
-    public Rol getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 
