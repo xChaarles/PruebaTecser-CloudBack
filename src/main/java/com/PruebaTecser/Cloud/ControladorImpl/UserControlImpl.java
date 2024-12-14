@@ -12,4 +12,7 @@ public interface UserControlImpl {
     @PostMapping("/auth/registrar")
     public ResponseEntity<UserDto> crearuser(@RequestBody UserDto registrar);
 
+    @PostMapping("/auth/login")
+    public ResponseEntity<UserDto> login(@RequestBody UserDto loginDto);
+
 }

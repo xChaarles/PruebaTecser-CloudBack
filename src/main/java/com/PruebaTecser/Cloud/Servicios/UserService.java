@@ -8,9 +8,11 @@ import com.PruebaTecser.Cloud.Repositorios.RoleRepo;
 import com.PruebaTecser.Cloud.Repositorios.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 @Service
@@ -59,6 +61,31 @@ public class UserService {
                 userDto.setStatuscode(404);
                 userDto.setMensaje("Ocurrio un error al realizar el registro");
             }
+        }catch (Exception e){
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrio un error: "+ e.getMessage());
+        }
+        return userDto;
+    }
+
+    public UserDto login (UserDto loginDto){
+        UserDto userDto = new UserDto();
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginDto.getEmail(), loginDto.getPassword()));
+            var user = userRepo.findByEmail(loginDto.getEmail()).orElseThrow();
+            var jwt = jwtService.generateSecretToken(user);
+            var refreshToken =jwtService.generateRefreshToken(new HashMap<>(), user);
+
+            userDto.setStatuscode(200);
+            userDto.setToken(jwt);
+            userDto.setRol(user.getRol().getName());
+            userDto.setNombre(user.getNombre());
+            userDto.setEmail(user.getEmail());
+            userDto.setRefreshToken(refreshToken);
+            userDto.setExpirationTime("24Hrs");
+            userDto.setMensaje("Inicio de Sesion Exitosa");
+
         }catch (Exception e){
             userDto.setStatuscode(500);
             userDto.setMensaje("Ocurrio un error: "+ e.getMessage());

@@ -18,4 +18,9 @@ public class UserControl implements UserControlImpl {
     public ResponseEntity<UserDto> crearuser(@RequestBody UserDto registrar){
         return ResponseEntity.ok(userService.crearUser(registrar));
     }
+
+    @Override
+    public ResponseEntity<UserDto> login(@RequestBody UserDto loginDto){
+        return ResponseEntity.ok(userService.login(loginDto));
+    }
 }
