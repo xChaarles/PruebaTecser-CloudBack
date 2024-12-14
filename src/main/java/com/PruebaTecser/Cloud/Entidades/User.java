@@ -16,5 +16,7 @@ public class User {
     private String name;
     private String street;
     private Date fecha;
+    private String username;
+    private String password;
 
 }
