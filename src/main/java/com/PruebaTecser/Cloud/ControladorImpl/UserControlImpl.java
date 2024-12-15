@@ -2,10 +2,7 @@ package com.PruebaTecser.Cloud.ControladorImpl;
 
 import com.PruebaTecser.Cloud.Dto.UserDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping
 public interface UserControlImpl {
@@ -21,4 +18,7 @@ public interface UserControlImpl {
 
     @GetMapping("/adminuser/getallUser")
     public ResponseEntity<UserDto> getAllUser();
+
+    @DeleteMapping("/admin/deleteUser/{id}")
+    public ResponseEntity<UserDto> deleteUserById(@PathVariable Integer id);
 }

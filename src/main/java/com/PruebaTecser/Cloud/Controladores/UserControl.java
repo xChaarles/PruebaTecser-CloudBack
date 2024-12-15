@@ -2,9 +2,11 @@ package com.PruebaTecser.Cloud.Controladores;
 
 import com.PruebaTecser.Cloud.ControladorImpl.UserControlImpl;
 import com.PruebaTecser.Cloud.Dto.UserDto;
+import com.PruebaTecser.Cloud.Entidades.User;
 import com.PruebaTecser.Cloud.Servicios.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +34,10 @@ public class UserControl implements UserControlImpl {
     @Override
     public ResponseEntity<UserDto> crearUserAdmin(@RequestBody UserDto registrar){
         return ResponseEntity.ok(userService.crearUser(registrar));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> deleteUserById(@PathVariable Integer id){
+        return ResponseEntity.ok(userService.deleteUser(id));
     }
 }

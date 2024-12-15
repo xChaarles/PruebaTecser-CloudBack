@@ -115,4 +115,23 @@ public class UserService {
         }
         return userDto;
     }
+
+    public UserDto deleteUser(Integer id){
+        UserDto userDto = new UserDto();
+        try{
+            Optional<User> userOptional = userRepo.findById(id);
+            if (userOptional.isPresent()){
+                userRepo.deleteById(id);
+                userDto.setStatuscode(200);
+                userDto.setMensaje("Usuario Eliminado exitosamente");
+            }else {
+                userDto.setStatuscode(404);
+                userDto.setMensaje("Usuario no encontrado");
+            }
+        }catch (Exception e){
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrio un error: "+ e.getMessage());
+        }
+        return userDto;
+    }
 }
