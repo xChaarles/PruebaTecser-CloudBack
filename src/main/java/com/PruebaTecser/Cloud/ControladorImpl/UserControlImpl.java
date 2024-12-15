@@ -21,4 +21,7 @@ public interface UserControlImpl {
 
     @DeleteMapping("/admin/deleteUser/{id}")
     public ResponseEntity<UserDto> deleteUserById(@PathVariable Integer id);
+
+    @GetMapping("/adminuser/getUser/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer id);
 }

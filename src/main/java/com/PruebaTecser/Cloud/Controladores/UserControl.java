@@ -40,4 +40,9 @@ public class UserControl implements UserControlImpl {
     public ResponseEntity<UserDto> deleteUserById(@PathVariable Integer id){
         return ResponseEntity.ok(userService.deleteUser(id));
     }
+
+    @Override
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer id){
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
 }

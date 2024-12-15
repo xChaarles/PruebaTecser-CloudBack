@@ -134,4 +134,18 @@ public class UserService {
         }
         return userDto;
     }
+
+    public UserDto getUserById(Integer id){
+        UserDto userDto = new UserDto();
+        try {
+            User userOptional = userRepo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                userDto.setUser(userOptional);
+                userDto.setStatuscode(200);
+                userDto.setMensaje("Usuario encontrado exitosamente");
+        }catch (Exception e){
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrio un error: "+ e.getMessage());
+        }
+        return userDto;
+    }
 }
