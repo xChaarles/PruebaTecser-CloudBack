@@ -106,7 +106,7 @@ public class UserService {
                 userDto.setStatuscode(200);
                 userDto.setMensaje("Lista de Usuario Cargada");
             }else {
-                userDto.setStatuscode(500);
+                userDto.setStatuscode(400);
                 userDto.setMensaje("No tienes Usuarios Registrados");
             }
         }catch (Exception e){
