@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private String street;
     private LocalDate fecha;
     private String imgUrl;
+    private String estado;
 
     @Column(unique = true)
     private String email;
@@ -69,7 +70,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String email, String imgUrl, LocalDate fecha, Integer id, String nombre, String password, Rol rol, String street) {
+    public User(String email, String imgUrl, String estado, LocalDate fecha, Integer id, String nombre, String password, Rol rol, String street) {
         this.email = email;
         this.fecha = fecha;
         this.id = id;
@@ -78,6 +79,15 @@ public class User implements UserDetails {
         this.password = password;
         this.rol = rol;
         this.street = street;
+        this.estado = estado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getImgUrl() {

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,7 @@ public class UserService {
             user.setNombre(registrar.getNombre());
             user.setStreet(registrar.getStreet());
             user.setImgUrl(registrar.getImgUrl());
+            user.setEstado(registrar.getEstado());
             user.setFecha(registrar.getFecha());
             user.setEmail(registrar.getEmail());
             user.setPassword(passwordEncoder.encode(registrar.getPassword()));
@@ -73,7 +75,7 @@ public class UserService {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     loginDto.getEmail(), loginDto.getPassword()));
-            var user = userRepo.findByEmail(loginDto.getEmail()).orElseThrow();
+            var user = userRepo.findByEmail(loginDto.getEmail()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             var jwt = jwtService.generateSecretToken(user);
             var refreshToken =jwtService.generateRefreshToken(new HashMap<>(), user);
 
@@ -81,11 +83,32 @@ public class UserService {
             userDto.setToken(jwt);
             userDto.setRol(user.getRol().getName());
             userDto.setNombre(user.getNombre());
+            userDto.setEstado(user.getEstado());
             userDto.setEmail(user.getEmail());
+            userDto.setImgUrl(user.getImgUrl());
             userDto.setRefreshToken(refreshToken);
             userDto.setExpirationTime("24Hrs");
             userDto.setMensaje("Inicio de Sesion Exitosa");
 
+        }catch (Exception e){
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrio un error: "+ e.getMessage());
+        }
+        return userDto;
+    }
+
+    public UserDto getAllUser(){
+        UserDto userDto = new UserDto();
+        try{
+            List<User> userList = userRepo.findAll();
+            if (!userList.isEmpty()){
+                userDto.setUserList(userList);
+                userDto.setStatuscode(200);
+                userDto.setMensaje("Lista de Usuario Cargada");
+            }else {
+                userDto.setStatuscode(500);
+                userDto.setMensaje("No tienes Usuarios Registrados");
+            }
         }catch (Exception e){
             userDto.setStatuscode(500);
             userDto.setMensaje("Ocurrio un error: "+ e.getMessage());

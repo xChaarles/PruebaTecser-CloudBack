@@ -23,4 +23,9 @@ public class UserControl implements UserControlImpl {
     public ResponseEntity<UserDto> login(@RequestBody UserDto loginDto){
         return ResponseEntity.ok(userService.login(loginDto));
     }
+
+    @Override
+    public ResponseEntity<UserDto> getAllUser(){
+        return ResponseEntity.ok(userService.getAllUser());
+    }
 }

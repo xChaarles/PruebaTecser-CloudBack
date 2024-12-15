@@ -23,6 +23,7 @@ public class UserDto {
     private String nombre;
     private String street;
     private String imgUrl;
+    private String estado;
     private LocalDate fecha;
     private String email;
     private String password;
@@ -33,7 +34,7 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String email, String expirationTime, LocalDate fecha, Integer id, String imgUrl, String mensaje, String nombre, String password, String refreshToken, String rol, int statuscode, String street, String token, User user, List<User> userList) {
+    public UserDto(String email,String estado, String expirationTime, LocalDate fecha, Integer id, String imgUrl, String mensaje, String nombre, String password, String refreshToken, String rol, int statuscode, String street, String token, User user, List<User> userList) {
         this.email = email;
         this.expirationTime = expirationTime;
         this.fecha = fecha;
@@ -49,6 +50,15 @@ public class UserDto {
         this.token = token;
         this.user = user;
         this.userList = userList;
+        this.estado = estado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getEmail() {
