@@ -184,4 +184,22 @@ public class UserService {
         }
         return userDto;
     }
+
+    public UserDto getUsersByNombre(String nombre) {
+        UserDto userDto = new UserDto();
+        try {
+            List<User> usuarios = userRepo.findByNombreContainingIgnoreCase(nombre);
+            if (usuarios.isEmpty()) {
+                throw new RuntimeException("No se encontraron usuarios con el nombre proporcionado");
+            }
+            userDto.setUserList(usuarios);
+            userDto.setStatuscode(200);
+            userDto.setMensaje("Usuarios encontrados exitosamente");
+        } catch (Exception e) {
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrió un error: " + e.getMessage());
+        }
+        return userDto;
+    }
+
 }

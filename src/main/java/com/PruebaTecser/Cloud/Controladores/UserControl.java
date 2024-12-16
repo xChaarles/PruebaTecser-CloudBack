@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -49,5 +50,10 @@ public class UserControl implements UserControlImpl {
     @Override
     public ResponseEntity<UserDto> updateUser(@PathVariable Integer id, @RequestBody UserDto updateUser){
         return ResponseEntity.ok(userService.updateUser(id, updateUser));
+    }
+
+    @Override
+    public ResponseEntity<UserDto> busquedaUser(@RequestParam String nombre){
+        return ResponseEntity.ok(userService.getUsersByNombre(nombre));
     }
 }

@@ -28,4 +28,7 @@ public interface UserControlImpl {
 
     @PutMapping("/admin/updateUser/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Integer id, @RequestBody UserDto updateUser);
+
+    @GetMapping("/public/busqueda")
+    public ResponseEntity<UserDto> busquedaUser(@RequestParam String nombre);
 }
