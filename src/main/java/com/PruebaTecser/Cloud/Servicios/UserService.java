@@ -148,4 +148,40 @@ public class UserService {
         }
         return userDto;
     }
+
+    public UserDto updateUser(Integer id, UserDto updateUser){
+        UserDto userDto = new UserDto();
+        try {
+            Optional<User> userOptional = userRepo.findById(id);
+            if (userOptional.isPresent()){
+                User userExiste = userOptional.get();
+                userExiste.setNombre(updateUser.getNombre());
+                userExiste.setStreet(updateUser.getStreet());
+                userExiste.setEmail(updateUser.getEmail());
+                userExiste.setImgUrl(updateUser.getImgUrl());
+                userExiste.setFecha(updateUser.getFecha());
+                userExiste.setEstado(updateUser.getEstado());
+                Optional<Rol> rolOpt = roleRepo.findByName(updateUser.getRol());
+                if (rolOpt.isPresent()){
+                    userExiste.setRol(rolOpt.get());
+                }else {
+                    userDto.setStatuscode(400);
+                    userDto.setMensaje("Rol no encontrado o no definido");
+                }
+
+                if (updateUser.getPassword() != null && !updateUser.getPassword().isEmpty()){
+                    userExiste.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+                }
+
+                User saveUser = userRepo.save(userExiste);
+                userDto.setUser(saveUser);
+                userDto.setStatuscode(200);
+                userDto.setMensaje("Usuario actualizado Exitosamente");
+            }
+        }catch (Exception e){
+            userDto.setStatuscode(500);
+            userDto.setMensaje("Ocurrio un error: "+ e.getMessage());
+        }
+        return userDto;
+    }
 }

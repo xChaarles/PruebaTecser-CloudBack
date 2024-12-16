@@ -45,4 +45,9 @@ public class UserControl implements UserControlImpl {
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
+
+    @Override
+    public ResponseEntity<UserDto> updateUser(@PathVariable Integer id, @RequestBody UserDto updateUser){
+        return ResponseEntity.ok(userService.updateUser(id, updateUser));
+    }
 }

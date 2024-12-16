@@ -1,6 +1,7 @@
 package com.PruebaTecser.Cloud.ControladorImpl;
 
 import com.PruebaTecser.Cloud.Dto.UserDto;
+import com.PruebaTecser.Cloud.Entidades.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,4 +25,7 @@ public interface UserControlImpl {
 
     @GetMapping("/adminuser/getUser/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id);
+
+    @PutMapping("/admin/updateUser/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Integer id, @RequestBody UserDto updateUser);
 }
